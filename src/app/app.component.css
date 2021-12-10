@@ -11,3 +11,9 @@ h1 {
   text-align: center;
   margin-top: -40px;
 }
+@media(max-width: 575px) {
+  h1 {
+    font-size: 24px;
+    line-height: normal;
+  }
+}
