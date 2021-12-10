@@ -5,7 +5,7 @@ import {registerLocaleData} from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
 
 import { AppComponent } from './app.component';
-import {MessageComponent} from './message/message.component';
+import {MessageComponent} from './main-page/main-page.component';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from "primeng/ripple";
 import {MessageModule} from "primeng/message";
@@ -15,7 +15,13 @@ import {TableModule} from 'primeng/table';
 registerLocaleData(localeRu, 'ru')
 @NgModule({
   declarations: [AppComponent, MessageComponent, ],
-  imports: [BrowserModule, FormsModule, ButtonModule, RippleModule, MessageModule, InputTextModule, TableModule,],
+  imports: [BrowserModule,
+    FormsModule,
+    ButtonModule,
+    RippleModule,
+    MessageModule,
+    InputTextModule,
+    TableModule,],
   providers: [],
   bootstrap: [AppComponent],
 })
