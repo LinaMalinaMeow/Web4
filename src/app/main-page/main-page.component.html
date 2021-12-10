@@ -1,0 +1,178 @@
+<div class="message">
+  <div class="canvas"></div>
+  <div class="input-div">
+    <form class="form">
+      <div class="coordinate">
+        <div class="coordinates-x">
+          <label for="inputText"> Choose X:</label>
+          <div class="row">
+            <div class="x-div">
+              <button pButton type="button" value="-4" id="x-button1"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-4"></button>
+            </div>
+            <div class="x-div">
+              <button pButton type="button" value="-3" id="x-button2"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-3"></button>
+            </div>
+            <div class="x-div">
+              <button pButton type="button" value="-2" id="x-button3"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-2"></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="x-div">
+              <button pButton type="button" value="-1" id="x-button4"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-1"></button>
+            </div>
+            <div class="x-div">
+              <button pButton type="button" value="0" id="x-button5"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="0"></button>
+            </div>
+            <div class="x-div">
+              <button pButton type="button" value="1" id="x-button6"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="1"></button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="x-div">
+              <button pButton type="button" value="2" id="x-button7"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="2"></button>
+            </div>
+            <div class="x-div">
+              <button pButton type="button" value="3" id="x-button8"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="3"></button>
+            </div>
+            <div class="x-div">
+              <button pButton type="button" value="4" id="x-button9"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="4"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coordinates-y">
+          <p><label for="inputText">Input Y:</label>
+            <br>
+            <input type="text" id="inputText" maxlength="10"></p>
+        </div>
+
+        <div class="coordinates-r">
+          <label for="inputText"> Choose R:</label>
+
+          <div class="row-r">
+
+            <div class="r-div">
+              <button pButton type="button" value="-4" id="r-button1"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-4"></button>
+            </div>
+            <div class="r-div">
+              <button pButton type="button" value="-3" id="r-button2"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-3"></button>
+            </div>
+            <div class="r-div">
+              <button pButton type="button" value="-2" id="r-button3"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-2"></button>
+            </div>
+          </div>
+          <div class="row-r">
+
+            <div class="r-div">
+              <button pButton type="button" value="-1" id="r-button4"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-1"></button>
+            </div>
+            <div class="r-div">
+              <button pButton type="button" value="0" id="r-button5"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="0"></button>
+            </div>
+            <div class="r-div">
+              <button pButton type="button" value="1" id="r-button6"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="1"></button>
+            </div>
+          </div>
+          <div class="row-r">
+
+            <div class="r-div">
+              <button pButton type="button" value="2" id="r-button7"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="2"></button>
+            </div>
+            <div class="r-div">
+              <button pButton type="button" value="3" id="r-button8"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="3"></button>
+            </div>
+            <div class="r-div">
+              <button pButton type="button" value="4" id="r-button9"
+                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="4"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="buttons">
+  <button pButton type="button" label="Clear" pRipple icon="pi pi-trash"></button>
+
+  <button pButton type="button" label="Add" pRipple icon="pi pi-check"></button>
+
+      </span>
+    </form>
+  </div>
+  <button pButton type="button" label="Go back" pRipple></button>
+</div>
+
+<!--<div class="main-page__table">-->
+<!--  <div class="main-page__table-header">-->
+<!--    <div class="main-page__table-header-element">-->
+<!--      <span>X</span>-->
+<!--    </div>-->
+<!--    <div class="main-page__table-header-element">-->
+<!--      <span>Y</span>-->
+<!--    </div>-->
+<!--    <div class="main-page__table-header-element">-->
+<!--      <span>R</span>-->
+<!--    </div>-->
+<!--    <div class="main-page__table-header-element">-->
+<!--      <span>Result</span>-->
+<!--    </div>-->
+<!--      </div>-->
+<!--      <div class="main-page__table-body-container">-->
+<!--           *ngFor="let point of getTablePoints()">-->
+<!--        <div class="main-page__table-body-element">-->
+<!--          <span>{{point.x}}</span>-->
+<!--        </div>-->
+<!--        <div class="main-page__table-body-element">-->
+<!--          <span>{{point.y}}</span>-->
+<!--        </div>-->
+<!--        <div class="main-page__table-body-element">-->
+<!--          <span>{{point.r}}</span>-->
+<!--        </div>-->
+<!--        <div class="main-page__table-body-element">-->
+<!--          <span>{{point.income}}</span>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+    <p-table class="tablePoints" responsiveLayout="scroll">
+<!--      [value]="point" -->
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>X</th>
+          <th>Y</th>
+          <th>R</th>
+          <th>Result</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>
+<!--            {{product.x}}-->
+          </td>
+          <td>
+<!--            {{product.r}}-->
+          </td>
+          <td>
+<!--            {{product.y}}-->
+          </td>
+          <td>
+<!--            {{product.result}}-->
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
