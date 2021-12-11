@@ -108,7 +108,7 @@
       <span class="buttons">
   <button pButton type="button" label="Clear" pRipple icon="pi pi-trash"></button>
 
-  <button pButton type="button" label="Add" pRipple icon="pi pi-check"></button>
+  <button pButton type="button" label="Add" (click)="loadPoints()" pRipple icon="pi pi-check"></button>
 
       </span>
     </form>
@@ -148,31 +148,29 @@
 <!--      </div>-->
 
 
-    <p-table class="tablePoints" responsiveLayout="scroll">
-<!--      [value]="point" -->
-
-      <ng-template pTemplate="header">
-        <tr>
-          <th>X</th>
-          <th>Y</th>
-          <th>R</th>
-          <th>Result</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-product>
-        <tr>
-          <td>
-<!--            {{product.x}}-->
-          </td>
-          <td>
-<!--            {{product.r}}-->
-          </td>
-          <td>
-<!--            {{product.y}}-->
-          </td>
-          <td>
-<!--            {{product.result}}-->
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+<p-table class="tablePoints" responsiveLayout="scroll">
+      [value]="points"
+<table>
+  <!--  <ng-template pTemplate="header">-->
+  <thead>
+  <tr>
+    <th>X</th>
+    <th>Y</th>
+    <th>R</th>
+    <th>Result</th>
+  </tr>
+  </thead>
+  <!--  </ng-template>-->
+  <!--  <ng-template pTemplate="body">-->
+  <tbody>
+  <tr *ngFor="let point of pointList">
+    <td>{{point.id}}</td>
+    <td>{{point.x}}</td>
+    <td>{{point.y}}</td>
+    <td>{{point.r}}</td>
+    <td>{{point.result}}</td>
+  </tr>
+  </tbody>
+</table>
+<!--  </ng-template>-->
+</p-table>
