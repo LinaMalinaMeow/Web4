@@ -3,15 +3,21 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {TablePoint} from "./tablePoint/tablePoint";
 
-@Injectable ()
+@Injectable()
 export class PointService {
-  private url="http://localhost:8080/points";
+  private url = "http://localhost:8080";
+
   constructor(private httpClient: HttpClient) {
   }
+
   // getPoints(){
   //   return this.httpClient.get(this.url);
   // }
-  getPoints(): Observable<TablePoint[]>{
-    return this.httpClient.get<TablePoint[]>(`${this.url}`);
+  getPoints(): Observable<TablePoint[]> {
+    return this.httpClient.get<TablePoint[]>(`${this.url + "/points"}`);
+  }
+
+  createEmployee(point: TablePoint): Observable<Object> {
+    return this.httpClient.post(`${this.url + "/addPoint"}`, point);
   }
 }

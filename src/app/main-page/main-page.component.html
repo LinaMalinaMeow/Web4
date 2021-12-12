@@ -1,6 +1,6 @@
 <div class="message">
   <div class="canvas">
-    <canvas #canvasEl width="510" height="510"></canvas>  </div>
+    <canvas #canvasEl width="510" height="510" (click)="clickOnChart(this,$event)"></canvas></div>
   <div class="input-div">
     <form class="form">
       <div class="coordinate">
@@ -135,3 +135,29 @@
   </tr>
   </tbody>
 </table>
+<div class="col-md-6 offset-md-3">
+  <h3> Create Employee </h3>
+  <form (ngSubmit) = "onSubmit()">
+
+    <div class="form-group">
+      <label>X</label>
+      <input type="text" class ="form-control" id = "x"
+             [(ngModel)] = "point.x" name = "x">
+    </div>
+
+    <div class="form-group">
+      <label>Y</label>
+      <input type="text" class ="form-control" id = "y"
+             [(ngModel)] = "point.y" name = "y">
+    </div>
+
+    <div class="form-group">
+      <label>R</label>
+      <input type="text" class ="form-control" id = "r"
+             [(ngModel)] = "point.r" name = "r">
+    </div>
+
+    <button class = "btn btn-success" type ="submit">Submit</button>
+
+  </form>
+</div>

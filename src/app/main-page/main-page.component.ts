@@ -12,7 +12,7 @@ import {ViewChild, ElementRef} from '@angular/core';
 })
 
 export class MessageComponent {
-
+  point: TablePoint=new TablePoint();
   // private point: Point;
   x: number = 2;
   y: number = 2;
@@ -29,7 +29,6 @@ export class MessageComponent {
   private step = 50;
   width = 510;
   height = 510;
-  private rFor = 3;
   private colorOfFigures = "#853c7f";
 
   constructor(
@@ -111,10 +110,7 @@ export class MessageComponent {
 
   loadPoints() {
     this.pointService.getPoints().subscribe((data: TablePoint[]) => {
-      console.log(data);
       this.pointList = data;
-      console.log(this.pointList)
-      console.log(this.pointList.length)
     });
   }
 
@@ -134,10 +130,30 @@ export class MessageComponent {
     this.context.fillStyle = this.colorOfFigures;
     this.context.strokeStyle = this.colorOfFigures;
     this.context.globalAlpha = 0.6;
-    this.context.arc(this.width / 2, this.height / 2, valR  , 3*Math.PI/2, 2 * Math.PI);
+    this.context.arc(this.width / 2, this.height / 2, valR, 3 * Math.PI / 2, 2 * Math.PI);
     this.context.lineTo(this.width / 2, this.height / 2)
     this.context.fill();
     this.context.stroke();
+  }
+
+  public clickOnChart(canvas, event) {
+    let rect = (this.canvasEl.nativeElement as HTMLCanvasElement).getBoundingClientRect();
+    let width = this.width;
+    let height = this.height;
+    let x = (event.clientX - rect.left - width / 2) / this.step;
+    let y = (height / 2 - event.clientY + rect.top) / this.step;
+    console.log("x=" + x.toFixed(2).replace(".00", ""));
+    console.log("y=" + y.toFixed(2).replace(".00", ""));
+  }
+  onSubmit(){
+    console.log(this.point);
+    this.savePoint();
+  }
+  savePoint(){
+    this.pointService.createEmployee(this.point).subscribe( data =>{
+        console.log(data);
+      },
+      error => console.log(error));
   }
 }
 
