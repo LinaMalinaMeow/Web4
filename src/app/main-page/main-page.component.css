@@ -88,7 +88,12 @@ input:focus {
 }
 .tablePoints {
   background-color: blue;
-  border-radius: 500px;
+  border-radius: 10px;
+  width: 100%;
+}
+.table-striped {
+  background-color: #eeebe9;
+  color: #090a0a;
 }
 /*Для любых разрешений меньше 991 пикс*/
 @media(max-width: 991px) {
