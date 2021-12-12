@@ -8,10 +8,13 @@
 }
 .buttons button {
   background-color: white;
-  border: 1px solid #00e1ff;
-  color: #1184e1;
+  border: 1px solid #7c3030;
+  color: #d36464;
 }
-
+.buttonOut {
+  background-color: #d36464;
+  border: 1px solid #7c3030;
+}
 .coordinates-y {
   margin: 15px 0;
   border: 1px solid #000;
@@ -57,6 +60,7 @@ div {
 .r-div {
   flex: 1;
 }
+
 input {
   width: 100%;
   border-radius: 3px;
@@ -87,7 +91,7 @@ input:focus {
   width: 50%;
 }
 .tablePoints {
-  background-color: blue;
+  background-color: #72588c;
   border-radius: 10px;
   width: 100%;
 }
@@ -95,6 +99,7 @@ input:focus {
   background-color: #eeebe9;
   color: #090a0a;
 }
+
 /*Для любых разрешений меньше 991 пикс*/
 @media(max-width: 991px) {
   .canvas {
