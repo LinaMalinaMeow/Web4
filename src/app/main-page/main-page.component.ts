@@ -1,8 +1,8 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild} from "@angular/core";
 import {PrimeNGConfig} from "primeng/api";
 import {TablePoint} from "../tablePoint/tablePoint";
 import {PointService} from "../point.service";
-import {ViewChild, ElementRef} from '@angular/core';
+import * as $ from 'jquery';
 
 /*Decorator*/
 @Component({
@@ -12,14 +12,18 @@ import {ViewChild, ElementRef} from '@angular/core';
 })
 
 export class MessageComponent {
-  point: TablePoint=new TablePoint();
+  point: TablePoint = new TablePoint();
   // private point: Point;
   x: number = 2;
   y: number = 2;
   r: number = 1;
   result: string;
   pointList: TablePoint[];
-
+  currentR: number = 4;
+  rButtonsMap = new Map().set(-4, "rButton1").set(-3, "rButton2").set(-2, "rButton3").set(-1, "rButton4")
+    .set(0, "rButton5").set(1, "rButton6").set(2, "rButton7").set(3, "rButton8").set(4, "rButton9")
+  xButtonsMap = new Map().set(-4, "xButton1").set(-3, "xButton2").set(-2, "xButton3").set(-1, "xButton4")
+    .set(0, "xButton5").set(1, "xButton6").set(2, "xButton7").set(3, "xButton8").set(4, "xButton9")
   /** Template reference to the canvas element */
   @ViewChild('canvasEl') canvasEl: ElementRef;
 
@@ -39,16 +43,41 @@ export class MessageComponent {
 
   ngAfterViewInit() {
     this.context = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
-
     this.drawCanvas();
+  }
+
+  getCurrentR() {
+    return this.currentR;
+  }
+
+  clearCanvas() {
+    // Сохраняем текущую матрицу трансформации
+    this.context.save();
+// Используем идентичную матрицу трансформации на время очистки
+    this.context.clearRect(0, 0, this.width, this.height);
+// Возобновляем матрицу трансформации
+    this.context.restore();
+  }
+
+  onClickR(button, val) {
+    // @ts-ignore
+    this.currentR = val;
+    $('.input_form_button_r').removeClass('button_r_clicked');
+    let id = "#" + this.rButtonsMap.get(val);
+    $(id).addClass("button_r_clicked");
+    this.clearCanvas();
+    if (this.getCurrentR() >= 0) {
+      this.drawCanvas();
+    } else {
+      this.drawReverseCanvas()
+    }
   }
 
   /**
    * Draws something using the context we obtained earlier on
    */
-
   private drawCanvas() {
-    let valR = 3 * this.step;
+    let valR = this.getCurrentR() * this.step;
     this.drawAXIS()
     this.drawRectangle(valR)
     this.drawTriangle(valR)
@@ -144,20 +173,67 @@ export class MessageComponent {
     let y = (height / 2 - event.clientY + rect.top) / this.step;
     console.log("x=" + x.toFixed(2).replace(".00", ""));
     console.log("y=" + y.toFixed(2).replace(".00", ""));
+    $('#x').val(x.toFixed(2).replace(".00", ""));
+    // @ts-ignore
+    this.point.x = $('#x').val()
+    $('#y').val(y.toFixed(2).replace(".00", ""));
+    // @ts-ignore
+    this.point.y = $('#y').val()
+    $('#r').val(this.getCurrentR());
+    // @ts-ignore
+    this.point.r = $('#r').val()
+    $('#submitButton').click();
   }
-  onSubmit(){
+
+  onSubmit() {
     console.log(this.point);
     this.savePoint();
   }
-  savePoint(){
-    this.pointService.createEmployee(this.point).subscribe( data =>{
+
+  savePoint() {
+    this.pointService.createEmployee(this.point).subscribe(data => {
         console.log(data);
+        this.loadPoints();
       },
       error => console.log(error));
   }
-}
 
-function sendData(sendData: any) {
-  throw new Error("Function not implemented.");
-}
+  private drawReverseCanvas() {
+    let valR = Math.abs(this.getCurrentR()) * this.step;
+    this.drawAXIS()
+    this.drawReverseRectangle(valR)
+    this.drawReverseTriangle(valR)
+    this.drawReverseCircle(valR)
+    // drawPoints()
+  }
 
+  private drawReverseRectangle(valR) {
+    this.context.fillStyle = this.colorOfFigures;
+    this.context.strokeStyle = this.colorOfFigures;
+    this.context.globalAlpha = 0.6;
+    this.context.beginPath();
+    this.context.fillRect(this.width / 2, this.height / 2, valR, -valR);
+  }
+
+  private drawReverseTriangle(valR) {
+    this.context.fillStyle = this.colorOfFigures;
+    this.context.globalAlpha = 0.6;
+    this.context.beginPath();
+    this.context.moveTo((this.width / 2) - valR / 2, this.height / 2);
+    this.context.lineTo(this.width / 2, (this.height + valR) / 2);
+    this.context.lineTo(this.width / 2, this.height / 2);
+    this.context.fill();
+  }
+
+  private drawReverseCircle(valR) {
+    this.context.beginPath();
+    this.context.fillStyle = this.colorOfFigures;
+    this.context.strokeStyle = this.colorOfFigures;
+    this.context.globalAlpha = 0.6;
+    this.context.arc(this.width / 2, this.height / 2, valR, Math.PI, 3 * Math.PI / 2);
+    this.context.lineTo(this.width / 2, this.height / 2)
+    this.context.fill();
+    this.context.stroke();
+  }
+
+}
