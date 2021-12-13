@@ -95,6 +95,16 @@ input:focus {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.error {
+  color: red;
+  display: none;
+}
+.error.active {
+  display: block;
+}
+table {
+  text-align: center;
+}
 
 .message > button {
   width: 100%;
