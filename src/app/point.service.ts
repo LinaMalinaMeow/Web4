@@ -10,14 +10,15 @@ export class PointService {
   constructor(private httpClient: HttpClient) {
   }
 
-  // getPoints(){
-  //   return this.httpClient.get(this.url);
-  // }
   getPoints(): Observable<TablePoint[]> {
-    return this.httpClient.get<TablePoint[]>(`${this.url + "/points"}`);
+    return this.httpClient.get<TablePoint[]>(`${this.url + "/getPoints"}`);
   }
 
-  createEmployee(point: TablePoint): Observable<Object> {
+  clearPoints(): Observable<TablePoint[]> {
+    return this.httpClient.get<TablePoint[]>(`${this.url + "/clearPoints"}`);
+  }
+
+  createPoint(point: TablePoint): Observable<Object> {
     return this.httpClient.post(`${this.url + "/addPoint"}`, point);
   }
 }

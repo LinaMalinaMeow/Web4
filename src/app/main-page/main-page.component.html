@@ -1,6 +1,7 @@
 <div class="message">
   <div class="canvas">
-    <canvas #canvasEl width="510" height="510" (click)="clickOnChart(this,$event)"></canvas></div>
+    <canvas #canvasEl width="510" height="510" (click)="clickOnChart(this,$event)"></canvas>
+  </div>
   <div class="input-div">
     <form class="form">
       <div class="coordinate">
@@ -9,43 +10,61 @@
           <div class="row">
             <div class="x-div">
               <button pButton type="button" value="-4" id="xButton1"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-4"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,-4)"
+                      label="-4"></button>
             </div>
             <div class="x-div">
               <button pButton type="button" value="-3" id="xButton2"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-3"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,-3)"
+                      label="-3"></button>
             </div>
             <div class="x-div">
               <button pButton type="button" value="-2" id="xButton3"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-2"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,-2)"
+                      label="-2"></button>
             </div>
           </div>
           <div class="row">
             <div class="x-div">
               <button pButton type="button" value="-1" id="xButton4"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="-1"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,-1)"
+                      label="-1"></button>
             </div>
             <div class="x-div">
               <button pButton type="button" value="0" id="xButton5"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="0"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,0)"
+                      label="0"></button>
             </div>
             <div class="x-div">
               <button pButton type="button" value="1" id="xButton6"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="1"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,1)"
+                      label="1"></button>
             </div>
           </div>
           <div class="row">
             <div class="x-div">
               <button pButton type="button" value="2" id="xButton7"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="2"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,2)"
+                      label="2"></button>
             </div>
             <div class="x-div">
               <button pButton type="button" value="3" id="xButton8"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="3"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,3)"
+                      label="3"></button>
             </div>
             <div class="x-div">
               <button pButton type="button" value="4" id="xButton9"
-                      class="p-button-outlined p-button-raised p-button-rounded" pRipple icon="" label="4"></button>
+                      class="input_form_button_x p-button-outlined p-button-raised p-button-rounded" pRipple icon=""
+                      (click)="onClickX(this,4)"
+                      label="4"></button>
             </div>
           </div>
         </div>
@@ -60,54 +79,62 @@
           <label for="inputText"> Choose R:</label>
 
           <div class="row-r">
-
             <div class="r-div">
               <button pButton type="button" value="-4" id="rButton1"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,-4)" pRipple icon="" label="-4"></button>
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,-4)" pRipple icon="" label="-4"></button>
             </div>
             <div class="r-div">
               <button pButton type="button" value="-3" id="rButton2"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,-3)" pRipple icon="" label="-3"></button>
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,-3)" pRipple icon="" label="-3"></button>
             </div>
             <div class="r-div">
               <button pButton type="button" value="-2" id="rButton3"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,-2)" pRipple icon="" label="-2"></button>
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,-2)" pRipple icon="" label="-2"></button>
             </div>
           </div>
           <div class="row-r">
             <div class="r-div">
               <button pButton type="button" value="-1" id="rButton4"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,-1)" pRipple icon="" label="-1"></button>
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,-1)" pRipple icon="" label="-1"></button>
             </div>
             <div class="r-div">
               <button pButton type="button" value="0" id="rButton5"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,0)" pRipple icon="" label="0"></button>
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,0)" pRipple icon="" label="0"></button>
             </div>
             <div class="r-div">
               <button pButton type="button" value="1" id="rButton6"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,1)" pRipple icon="" label="1"></button>
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,1)" pRipple icon="" label="1"></button>
             </div>
           </div>
           <div class="row-r">
             <div class="r-div">
-              <button pButton type="button" value="2" id="r-button7"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,2)" pRipple icon="" label="2"></button>
+              <button pButton type="button" value="2" id="rButton7"
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,2)" pRipple icon="" label="2"></button>
             </div>
             <div class="r-div">
-              <button pButton type="button" value="3" id="r-button8"
-                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,3)" pRipple icon="" label="3"></button>
+              <button pButton type="button" value="3" id="rButton8"
+                      class="input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,3)" pRipple icon="" label="3"></button>
             </div>
             <div class="r-div">
-              <button pButton type="button" value="4" id="r-button9"
-                      class="button_r_clicked input_form_button_r p-button-outlined p-button-raised p-button-rounded" (click)="onClickR(this,4)"  pRipple icon="" label="4"></button>
+              <button pButton type="button" value="4" id="rButton9"
+                      class="button_r_clicked input_form_button_r p-button-outlined p-button-raised p-button-rounded"
+                      (click)="onClickR(this,4)" pRipple icon="" label="4"></button>
             </div>
           </div>
         </div>
       </div>
       <span class="buttons">
-  <button pButton type="button" label="Clear" pRipple icon="pi pi-trash"></button>
+  <button pButton type="button" label="Clear" (click)="clearPoints()" pRipple icon="pi pi-trash"></button>
 
-  <button pButton type="button" label="Add" (click)="loadPoints()" pRipple icon="pi pi-check"></button>
+  <button pButton type="button" label="Add" (click)="addPoint()" pRipple icon="pi pi-check"></button>
 
       </span>
     </form>
@@ -124,7 +151,7 @@
   <th>Result</th>
   </thead>
   <tbody>
-  <tr *ngFor = "let point of pointList">
+  <tr *ngFor="let point of pointList">
     <td> {{ point.id}}</td>
     <td> {{ point.x}}</td>
     <td> {{ point.y}}</td>
@@ -134,20 +161,20 @@
   </tbody>
 </table>
 <div class="col-md-6 offset-md-3">
-  <form (ngSubmit) = "onSubmit()">
+  <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input type="text" class ="form-control" id = "x" [hidden]="true"
-             [(ngModel)] = "point.x" name = "x">
+      <input type="text" class="form-control" id="x" [hidden]="true"
+             [(ngModel)]="point.x" name="x">
     </div>
     <div class="form-group">
-      <input type="text" class ="form-control" id = "y" [hidden]="true"
-             [(ngModel)] = "point.y" name = "y">
+      <input type="text" class="form-control" id="y" [hidden]="true"
+             [(ngModel)]="point.y" name="y">
     </div>
     <div class="form-group">
-      <input type="text" class ="form-control" id = "r" [hidden]="true"
-             [(ngModel)] = "point.r" name = "r">
+      <input type="text" class="form-control" id="r" [hidden]="true"
+             [(ngModel)]="point.r" name="r">
     </div>
-    <button [hidden]="true" id="submitButton" class = "btn btn-success" type ="submit">Submit</button>
+    <button [hidden]="true" id="submitButton" class="btn btn-success" type="submit">Submit</button>
   </form>
 </div>
 

@@ -44,19 +44,69 @@ export class MessageComponent {
   ngAfterViewInit() {
     this.context = (this.canvasEl.nativeElement as HTMLCanvasElement).getContext('2d');
     this.drawCanvas();
+    this.loadPoints();
+  }
+
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+  }
+
+  onSubmit() {
+    console.log(this.point);
+    this.savePoint();
+  }
+
+  savePoint() {
+    this.pointService.createPoint(this.point).subscribe(data => {
+        this.loadPoints();
+      },
+      error => console.log(error));
+  }
+
+  addPoint() {
+
+    this.savePoint()
+  }
+
+  loadPoints() {
+    this.pointService.getPoints().subscribe((data: TablePoint[]) => {
+      this.pointList = data;
+      if (this.pointList.length != 0) {
+        for (let i = 0; i < this.pointList.length; i++) {
+          this.drawShoot(this.pointList[i].x, this.pointList[i].y, this.pointList[i].r);
+        }
+      } else {
+      }
+    });
   }
 
   getCurrentR() {
     return this.currentR;
   }
 
+  clearPoints() {
+    this.clearCanvas()
+    this.pointService.clearPoints().subscribe((data: TablePoint[]) => {
+      this.pointList = data;
+    });
+    if (this.getCurrentR() >= 0) {
+      this.drawCanvas();
+    } else {
+      this.drawReverseCanvas()
+    }
+  }
+
   clearCanvas() {
-    // Сохраняем текущую матрицу трансформации
     this.context.save();
-// Используем идентичную матрицу трансформации на время очистки
     this.context.clearRect(0, 0, this.width, this.height);
-// Возобновляем матрицу трансформации
     this.context.restore();
+  }
+
+  onClickX(button, val) {
+    $('#x').val(val);
+    $('.input_form_button_x').removeClass('button_x_clicked');
+    let id = "#" + this.xButtonsMap.get(val);
+    $(id).addClass("button_x_clicked");
   }
 
   onClickR(button, val) {
@@ -71,6 +121,11 @@ export class MessageComponent {
     } else {
       this.drawReverseCanvas()
     }
+    if (this.pointList.length != 0) {
+      for (let i = 0; i < this.pointList.length; i++) {
+        this.drawShoot(this.pointList[i].x, this.pointList[i].y, this.pointList[i].r);
+      }
+    }
   }
 
   /**
@@ -82,7 +137,6 @@ export class MessageComponent {
     this.drawRectangle(valR)
     this.drawTriangle(valR)
     this.drawCircle(valR)
-    // drawPoints()
   }
 
   private drawAXIS() {
@@ -100,6 +154,7 @@ export class MessageComponent {
     this.context.strokeText("Y", 240, 10);
     this.context.strokeText("X", 500, this.height / 2 - 10);
     this.context.stroke();
+
     //draw x-dash
     for (let i = -5; i <= 5; i++) {
       this.context.beginPath();
@@ -133,17 +188,6 @@ export class MessageComponent {
     this.context.fillRect(this.width / 2, this.height / 2, -valR, -valR);
   }
 
-  ngOnInit() {
-    this.primengConfig.ripple = true;
-  }
-
-  loadPoints() {
-    this.pointService.getPoints().subscribe((data: TablePoint[]) => {
-      this.pointList = data;
-    });
-  }
-
-
   private drawTriangle(valR) {
     this.context.fillStyle = this.colorOfFigures;
     this.context.globalAlpha = 0.6;
@@ -173,30 +217,19 @@ export class MessageComponent {
     let y = (height / 2 - event.clientY + rect.top) / this.step;
     console.log("x=" + x.toFixed(2).replace(".00", ""));
     console.log("y=" + y.toFixed(2).replace(".00", ""));
-    $('#x').val(x.toFixed(2).replace(".00", ""));
+    // $('#x').val(x.toFixed(2).replace(".00", ""));
     // @ts-ignore
-    this.point.x = $('#x').val()
-    $('#y').val(y.toFixed(2).replace(".00", ""));
+    this.point.x = x.toFixed(2).replace(".00", "");
+    // $('#y').val(y.toFixed(2).replace(".00", ""));
     // @ts-ignore
-    this.point.y = $('#y').val()
-    $('#r').val(this.getCurrentR());
+    this.point.y = y.toFixed(2).replace(".00", "")
+    // $('#r').val(this.getCurrentR());
     // @ts-ignore
-    this.point.r = $('#r').val()
+    this.point.r = this.getCurrentR();
     $('#submitButton').click();
+    this.point = new TablePoint();
   }
 
-  onSubmit() {
-    console.log(this.point);
-    this.savePoint();
-  }
-
-  savePoint() {
-    this.pointService.createEmployee(this.point).subscribe(data => {
-        console.log(data);
-        this.loadPoints();
-      },
-      error => console.log(error));
-  }
 
   private drawReverseCanvas() {
     let valR = Math.abs(this.getCurrentR()) * this.step;
@@ -236,4 +269,23 @@ export class MessageComponent {
     this.context.stroke();
   }
 
+  drawShoot(x, y, r) {
+    let color;
+    if (this.checkArea(x, y, r) === 'Да') {
+      color = 'green';
+    } else {
+      color = 'red';
+    }
+    this.context.beginPath();
+    this.context.arc(this.width / 2 + x * this.step, this.height / 2 - y * this.step, this.dash, 0, Math.PI * 2);
+    this.context.fillStyle = color;
+    this.context.strokeStyle = color;
+    this.context.globalAlpha = 0.45;
+    this.context.fill();
+    this.context.stroke();
+  }
+
+  private checkArea(x, y, r) {
+    return "Да";
+  }
 }

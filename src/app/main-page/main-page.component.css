@@ -6,27 +6,33 @@
   flex-wrap: wrap;
   margin: 15px 0;
 }
+
 .buttons button {
   background-color: white;
   border: 1px solid #7c3030;
   color: #d36464;
 }
+
 .buttonOut {
   background-color: #d36464;
   border: 1px solid #7c3030;
 }
+
 .coordinates-y {
   margin: 15px 0;
   border: 1px solid #000;
 }
+
 .row-r {
   margin-bottom: 15px;
 }
+
 .row-r button, .x-div button {
   width: 100%;
   border: 1px solid #72588c;
   color: #090a0a;
 }
+
 h1 {
   margin-top: 0;
 }
@@ -71,9 +77,11 @@ input {
   border: 1px solid #000;
   margin-top: 10px;
 }
+
 input:focus {
   outline: none;
 }
+
 .coordinates-x, .coordinates-y, .coordinates-r {
   background: rgba(255, 255, 255, 0.75);
   border: 2px solid black;
@@ -81,43 +89,50 @@ input:focus {
   border-radius: 20px;
   overflow: hidden;
 }
+
 .message {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .message > button {
   width: 100%;
 }
+
 .canvas {
   width: 50%;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .tablePoints {
   background-color: #72588c;
   border-radius: 10px;
   width: 100%;
 }
+
 .table-striped {
   background-color: #eeebe9;
   color: #090a0a;
 }
 
 /*Для любых разрешений меньше 991 пикс*/
-@media(max-width: 991px) {
+@media (max-width: 991px) {
   .canvas {
     width: 500px;
     height: 400px;
     max-width: 100%;
     margin: 0 auto;
   }
+
   .canvas canvas {
     max-width: 100%;
   }
+
   .message {
-    display:block;
+    display: block;
     width: 400px;
     max-width: 100%;
     margin: 0 auto;
@@ -125,22 +140,27 @@ input:focus {
 
 }
 
-@media(max-width: 575px) {
+@media (max-width: 575px) {
   div {
     padding: 0;
   }
+
   .canvas {
     margin-bottom: 15px;
   }
+
   .coordinates-x, .coordinates-y, .coordinates-r {
     padding: 15px;
   }
+
   .coordinates-x label, .coordinates-y label, .coordinates-r label {
     margin-bottom: 8px;
   }
+
   .row-r, .row {
     grid-gap: 15px;
   }
+
   .row {
     margin-bottom: 10px;
   }
@@ -150,6 +170,11 @@ input:focus {
     padding-left: 0;
   }
 }
-.button_r_clicked{
-  background-color:red;
+
+.button_r_clicked {
+  background-color: #856c7b;
+}
+
+.button_x_clicked{
+  background-color: rgb(221, 174, 159);
 }
