@@ -1,3 +1,8 @@
+// Валидация везде
+// сделать авторизацию
+// обработка ошибок????!
+// отрисовка выстрелов
+
 import {Component, ElementRef, ViewChild} from "@angular/core";
 import {PrimeNGConfig} from "primeng/api";
 import {TablePoint} from "../tablePoint/tablePoint";
@@ -64,10 +69,24 @@ export class MessageComponent {
   }
 
   addPoint() {
-
-    this.savePoint()
+    console.log($('#x').val())
+    // console.log($('#yField').val())
+    // $('#y').val($('#yField').val())
+    // @ts-ignore
+    this.point.x=$('#x').val();
+    // @ts-ignore
+    this.point.y=$('#y').val();
+    this.point.r=this.getCurrentR();
+    // $('#y input[type=hidden]').val($('#yField').val());
+    console.log($('#y').val())
+    $('#r').val(this.getCurrentR());
+    console.log($('#r').val())
+    $('#submitButton').click();
+    this.point = new TablePoint();
   }
-
+  setY(event){
+    $('#y').val(event.target.value)
+  }
   loadPoints() {
     this.pointService.getPoints().subscribe((data: TablePoint[]) => {
       this.pointList = data;
@@ -107,6 +126,10 @@ export class MessageComponent {
     $('.input_form_button_x').removeClass('button_x_clicked');
     let id = "#" + this.xButtonsMap.get(val);
     $(id).addClass("button_x_clicked");
+  }
+
+  onChangeY() {
+    $('#y').val($('#yField').val());
   }
 
   onClickR(button, val) {

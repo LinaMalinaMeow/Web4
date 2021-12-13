@@ -72,7 +72,9 @@
         <div class="coordinates-y">
           <p><label for="inputText">Input Y:</label>
             <br>
-            <input type="text" id="inputText" maxlength="10"></p>
+            <input id="yField"
+                   (keyup)="setY($event)"
+                   type="text" id="inputText" maxlength="10"></p>
         </div>
 
         <div class="coordinates-r">
