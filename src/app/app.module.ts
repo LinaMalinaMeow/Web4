@@ -17,6 +17,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {PointService} from "./point.service";
 import {AppRoutingModule} from "./app-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
+import {AuthService} from "./auth.service";
+import {AuthGuardService} from "./auth-guard.service";
 
 
 registerLocaleData(localeRu, 'ru')
@@ -35,7 +37,7 @@ registerLocaleData(localeRu, 'ru')
   /*view classes*/
   declarations: [AppComponent, MessageComponent, LoginPageComponent, NotFoundComponent, ],
   /*this classes create service, used module*/
-  providers: [PointService],
+  providers: [PointService,AuthService,AuthGuardService],
   /*root component, который вызывается по умолчанию при загрузке приложения*/
   bootstrap: [AppComponent],
 })
