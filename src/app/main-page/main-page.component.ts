@@ -1,8 +1,3 @@
-// Валидация везде
-// сделать авторизацию
-// обработка ошибок????!
-// отрисовка выстрелов
-
 import {Component, ElementRef, ViewChild} from "@angular/core";
 import {PrimeNGConfig} from "primeng/api";
 import {TablePoint} from "../tablePoint/tablePoint";
@@ -19,11 +14,6 @@ import {Router} from "@angular/router";
 
 export class MessageComponent {
   point: TablePoint = new TablePoint();
-  // private point: Point;
-  // x: number = 2;
-  // y: number = 2;
-  // r: number = 1;
-  // result: string;
   pointList: TablePoint[];
   currentR: number = 4;
   rButtonsMap = new Map().set(-4, "rButton1").set(-3, "rButton2").set(-2, "rButton3").set(-1, "rButton4")

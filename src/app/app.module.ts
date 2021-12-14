@@ -19,6 +19,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import {AuthService} from "./auth.service";
 import {AuthGuardService} from "./auth-guard.service";
+import {UserService} from "./user.service";
 
 
 registerLocaleData(localeRu, 'ru')
@@ -37,7 +38,7 @@ registerLocaleData(localeRu, 'ru')
   /*view classes*/
   declarations: [AppComponent, MessageComponent, LoginPageComponent, NotFoundComponent, ],
   /*this classes create service, used module*/
-  providers: [PointService,AuthService,AuthGuardService],
+  providers: [PointService,AuthService,AuthGuardService,UserService],
   /*root component, который вызывается по умолчанию при загрузке приложения*/
   bootstrap: [AppComponent],
 })

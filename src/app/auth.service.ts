@@ -2,7 +2,7 @@ export class AuthService {
   isLoggedIn = false;
 
   isAuth() {
-    return false;
+    return this.isLoggedIn;
   }
 
   logIn() {

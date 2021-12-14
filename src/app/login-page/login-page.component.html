@@ -1,11 +1,12 @@
 <form class="authorization">
   <label class="authorization__login">
     Username
-    <input type="text" required>
+    <input id="login" type="text" required>
   </label>
   <label class="authorization__pass">
     Password
-    <input type="password">
+    <input id="password" type="password">
   </label>
+  <button (click)="registration()" >Регистрация</button>
   <button (click)="signIn()" >Войти</button>
 </form>
