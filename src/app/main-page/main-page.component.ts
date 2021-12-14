@@ -8,6 +8,7 @@ import {PrimeNGConfig} from "primeng/api";
 import {TablePoint} from "../tablePoint/tablePoint";
 import {PointService} from "../point.service";
 import * as $ from 'jquery';
+import {Router} from "@angular/router";
 
 /*Decorator*/
 @Component({
@@ -41,6 +42,7 @@ export class MessageComponent {
   private colorOfFigures = "#853c7f";
 
   constructor(
+    private router: Router,
     private primengConfig: PrimeNGConfig,
     private pointService: PointService,
   ) {
@@ -73,10 +75,10 @@ export class MessageComponent {
     // console.log($('#yField').val())
     // $('#y').val($('#yField').val())
     // @ts-ignore
-    this.point.x=$('#x').val();
+    this.point.x = $('#x').val();
     // @ts-ignore
-    this.point.y=$('#y').val();
-    this.point.r=this.getCurrentR();
+    this.point.y = $('#y').val();
+    this.point.r = this.getCurrentR();
     // $('#y input[type=hidden]').val($('#yField').val());
     console.log($('#y').val())
     $('#r').val(this.getCurrentR());
@@ -84,9 +86,11 @@ export class MessageComponent {
     $('#submitButton').click();
     this.point = new TablePoint();
   }
-  setY(event){
+
+  setY(event) {
     $('#y').val(event.target.value)
   }
+
   loadPoints() {
     this.pointService.getPoints().subscribe((data: TablePoint[]) => {
       this.pointList = data;
@@ -310,5 +314,9 @@ export class MessageComponent {
 
   private checkArea(x, y, r) {
     return "Да";
+  }
+
+  signOut() {
+    this.router.navigate(['/login']);
   }
 }

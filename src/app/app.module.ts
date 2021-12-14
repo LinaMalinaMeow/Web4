@@ -13,17 +13,12 @@ import {MessageModule} from "primeng/message";
 import {InputTextModule} from "primeng/inputtext";
 import {TableModule} from 'primeng/table';
 import {LoginPageComponent} from "./login-page/login-page.component";
-import { Routes, RouterModule } from '@angular/router';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {PointService} from "./point.service";
+import {AppRoutingModule} from "./app-routing.module";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
-const routes: Routes = [
-  { path: 'login', component: LoginPageComponent },
-  { path: 'main', component: MessageComponent},
-
-  { path: '',   redirectTo: 'login', pathMatch: 'full' }
-];
 registerLocaleData(localeRu, 'ru')
 /*For creating modules*/
 @NgModule({
@@ -33,12 +28,12 @@ registerLocaleData(localeRu, 'ru')
     RippleModule,
     MessageModule,
     InputTextModule,
-    RouterModule.forRoot(routes),
     TableModule,
     HttpClientModule,
+    AppRoutingModule,
 ],
   /*view classes*/
-  declarations: [AppComponent, MessageComponent, LoginPageComponent, ],
+  declarations: [AppComponent, MessageComponent, LoginPageComponent, NotFoundComponent, ],
   /*this classes create service, used module*/
   providers: [PointService],
   /*root component, который вызывается по умолчанию при загрузке приложения*/
