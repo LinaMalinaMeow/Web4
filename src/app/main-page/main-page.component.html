@@ -67,7 +67,7 @@
                       label="4"></button>
             </div>
           </div>
-          <div class="error">
+          <div id="wrongFieldX" class="error">
             Ошибка!
           </div>
         </div>
@@ -78,6 +78,9 @@
             <input id="yField"
                    (keyup)="setY($event)"
                    type="text" id="inputText" maxlength="10"></p>
+          <div id="wrongFieldY" class="error">
+            Ошибка!
+          </div>
         </div>
 
         <div class="coordinates-r">
@@ -135,6 +138,9 @@
             </div>
           </div>
         </div>
+        <div id="wrongFieldR" class="error">
+          Ошибка!
+        </div>
       </div>
       <span class="buttons">
   <button pButton type="button" label="Clear" (click)="clearPoints()" pRipple icon="pi pi-trash"></button>
@@ -166,16 +172,13 @@
 <div>
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <input type="text" class="form-control" id="x" [hidden]="true"
-             [(ngModel)]="point.x" name="x">
+      <input type="text" class="form-control" id="x" [hidden]="true">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="y" [hidden]="true"
-             [(ngModel)]="point.y" name="y">
+      <input type="text" class="form-control" id="y" [hidden]="true">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="r" [hidden]="true"
-             [(ngModel)]="point.r" name="r">
+      <input type="text" class="form-control" id="r" [hidden]="true">
     </div>
     <button [hidden]="true" id="submitButton" class="btn btn-success" type="submit">Submit</button>
   </form>

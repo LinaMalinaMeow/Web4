@@ -4,6 +4,7 @@ import {TablePoint} from "../tablePoint/tablePoint";
 import {PointService} from "../point.service";
 import * as $ from 'jquery';
 import {Router} from "@angular/router";
+import {AuthService} from "../auth.service";
 
 /*Decorator*/
 @Component({
@@ -35,6 +36,7 @@ export class MessageComponent {
     private router: Router,
     private primengConfig: PrimeNGConfig,
     private pointService: PointService,
+    private authService: AuthService
   ) {
   }
 
@@ -62,14 +64,11 @@ export class MessageComponent {
 
   addPoint() {
     console.log($('#x').val())
-    // console.log($('#yField').val())
-    // $('#y').val($('#yField').val())
     // @ts-ignore
     this.point.x = $('#x').val();
     // @ts-ignore
     this.point.y = $('#y').val();
     this.point.r = this.getCurrentR();
-    // $('#y input[type=hidden]').val($('#yField').val());
     console.log($('#y').val())
     $('#r').val(this.getCurrentR());
     console.log($('#r').val())
@@ -140,6 +139,7 @@ export class MessageComponent {
     }
     if (this.pointList.length != 0) {
       for (let i = 0; i < this.pointList.length; i++) {
+        console.log("ya tyt")
         this.drawShoot(this.pointList[i].x, this.pointList[i].y, this.pointList[i].r);
       }
     }
@@ -254,7 +254,6 @@ export class MessageComponent {
     this.drawReverseRectangle(valR)
     this.drawReverseTriangle(valR)
     this.drawReverseCircle(valR)
-    // drawPoints()
   }
 
   private drawReverseRectangle(valR) {
@@ -288,7 +287,14 @@ export class MessageComponent {
 
   drawShoot(x, y, r) {
     let color;
-    if (this.checkArea(x, y, r) === 'Да') {
+    let result;
+    if (r > 0) {
+      result = this.checkArea(x, y, this.getCurrentR());
+    } else {
+      result = this.checkReversedArea(x, y, Math.abs(this.getCurrentR()));
+    }
+
+    if (result === 'Да') {
       color = 'green';
     } else {
       color = 'red';
@@ -302,11 +308,43 @@ export class MessageComponent {
     this.context.stroke();
   }
 
-  private checkArea(x, y, r) {
-    return "Да";
+  signOut() {
+    this.authService.logOut();
+    this.router.navigate(['/login']);
   }
 
-  signOut() {
-    this.router.navigate(['/login']);
+  checkArea(x, y, r) {
+    return (this.checkRectangle(x, y, r) || this.checkTriangle(x, y, r) || this.checkCircle(x, y, r)) ? 'Да' : 'Нет';
+  }
+
+  checkRectangle(x, y, r) {
+    return x <= 0 && y >= 0 && x >= -r && y <= r;
+  }
+
+  checkTriangle(x, y, r) {
+    return x >= 0 && y <= 0 && y >= x - r / 2;
+  }
+
+  checkCircle(x, y, r) {
+    return x >= 0 && y >= 0 && x * x + y * y <= r * r;
+  }
+
+  checkReversedArea(x, y, r) {
+    return (this.checkReversedRectangle(x, y, r)
+      || this.checkReversedTriangle(x, y, r)
+      || this.checkReversedCircle(x, y, r)) ? 'Да' : 'Нет';
+  }
+
+  checkReversedRectangle(x, y, r) {
+    r = Math.abs(r);
+    return x >= 0 && y >= 0 && x <= r && y <= r;
+  }
+
+  checkReversedTriangle(x, y, r) {
+    return x <= 0 && y <= 0 && y + x >= r / 2;
+  }
+
+  checkReversedCircle(x, y, r) {
+    return x <= 0 && y >= 0 && x * x + y * y <= r * r;
   }
 }

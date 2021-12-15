@@ -28,6 +28,7 @@ export class LoginPageComponent {
   }
 
   signIn() {
+    $('#wrongFieldAuth').val("");
     // @ts-ignore
     this.user.username = $('#login').val();
     // @ts-ignore
@@ -41,8 +42,13 @@ export class LoginPageComponent {
         error => {
           if (error.status == '400') {
             console.log(error.error)
+            $('#wrongFieldAuth').val(error.error);
             return;
-          } else if (error.status == '200'){
+          } else if (error.status == '200') {
+            console.log(error.error.text)
+            let tmp = error.error.text;
+            // @ts-ignore
+            this.authService.setId(tmp.substr(39, tmp.length))
             this.toMainPage();
           }
         });
@@ -55,6 +61,7 @@ export class LoginPageComponent {
   }
 
   registration() {
+    $('#wrongFieldAuth').val("");
     // @ts-ignore
     this.user.username = $('#login').val();
     // @ts-ignore
@@ -66,8 +73,19 @@ export class LoginPageComponent {
           this.toMainPage();
         },
         error => {
-          console.log(error)
-          return;
+          if (error.status == '400') {
+            $('#wrongFieldAuth').val(error.error);
+            console.log($('#wrongFieldAuth').val());
+            console.log(error)
+            console.log(error.error)
+            return;
+          } else if (error.status == '200') {
+            console.log(error.error.text)
+            let tmp = error.error.text;
+            // @ts-ignore
+            this.authService.setId(tmp.substr(34, tmp.length))
+            this.toMainPage();
+          }
         });
     }
   }
