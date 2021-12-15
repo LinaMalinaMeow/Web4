@@ -67,9 +67,8 @@
                       label="4"></button>
             </div>
           </div>
-          <div id="wrongFieldX" class="error">
-            Ошибка!
-          </div>
+          <p id="wrongFieldX" class="error">
+          </p>
         </div>
 
         <div class="coordinates-y">
@@ -78,9 +77,8 @@
             <input id="yField"
                    (keyup)="setY($event)"
                    type="text" id="inputText" maxlength="10"></p>
-          <div id="wrongFieldY" class="error">
-            Ошибка!
-          </div>
+          <p id="wrongFieldY" class="error">
+          </p>
         </div>
 
         <div class="coordinates-r">
@@ -138,9 +136,8 @@
             </div>
           </div>
         </div>
-        <div id="wrongFieldR" class="error">
-          Ошибка!
-        </div>
+        <p id="wrongFieldR" class="error">
+        </p>
       </div>
       <span class="buttons">
   <button pButton type="button" label="Clear" (click)="clearPoints()" pRipple icon="pi pi-trash"></button>

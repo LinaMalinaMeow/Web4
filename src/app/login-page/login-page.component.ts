@@ -22,19 +22,28 @@ export class LoginPageComponent {
   ) {
   }
 
+  private wrongField;
   private user: User = new User();
 
+
   ngOnInit(): void {
+    this.wrongField = document.getElementById("wrongFieldAuth");
+    if (localStorage.getItem("isLoggedIn") != null && localStorage.getItem("isLoggedIn") == "true") {
+      this.authService.setId(localStorage.getItem("Id"));
+      this.authService.logIn()
+      this.router.navigate(['/main'])
+    }
   }
 
   signIn() {
-    $('#wrongFieldAuth').val("");
+    this.wrongField.textContent = "";
     // @ts-ignore
     this.user.username = $('#login').val();
     // @ts-ignore
     this.user.password = $('#password').val();
     if (this.user.username === "" || this.user.password === "") {
       console.log("Поля не должны быть пустыми")
+      this.wrongField.textContent = "Поля не должны быть пустыми";
     } else {
       this.userService.login(this.user).subscribe(data => {
           this.toMainPage();
@@ -42,7 +51,7 @@ export class LoginPageComponent {
         error => {
           if (error.status == '400') {
             console.log(error.error)
-            $('#wrongFieldAuth').val(error.error);
+            this.wrongField.textContent = error.error;
             return;
           } else if (error.status == '200') {
             console.log(error.error.text)
@@ -56,28 +65,30 @@ export class LoginPageComponent {
   }
 
   toMainPage() {
+    localStorage.setItem("Id", this.authService.getId())
+    localStorage.setItem("isLoggedIn", "true")
     this.authService.logIn()
     this.router.navigate(['/main'])
   }
 
   registration() {
-    $('#wrongFieldAuth').val("");
+    this.wrongField.textContent = "";
     // @ts-ignore
     this.user.username = $('#login').val();
     // @ts-ignore
     this.user.password = $('#password').val();
     if (this.user.username === "" || this.user.password === "") {
       console.log("Поля не должны быть пустыми")
+      this.wrongField.textContent = "Поля не должны быть пустыми";
     } else {
       this.userService.createUser(this.user).subscribe(data => {
           this.toMainPage();
         },
         error => {
           if (error.status == '400') {
-            $('#wrongFieldAuth').val(error.error);
-            console.log($('#wrongFieldAuth').val());
             console.log(error)
             console.log(error.error)
+            this.wrongField.textContent = error.error;
             return;
           } else if (error.status == '200') {
             console.log(error.error.text)

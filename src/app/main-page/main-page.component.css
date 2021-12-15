@@ -95,13 +95,11 @@ input:focus {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
 .error {
   color: red;
-  display: none;
 }
-.error.active {
-  display: block;
-}
+
 table {
   text-align: center;
 }
@@ -185,6 +183,6 @@ table {
   background-color: #856c7b;
 }
 
-.button_x_clicked{
+.button_x_clicked {
   background-color: rgb(221, 174, 159);
 }

@@ -31,6 +31,9 @@ export class MessageComponent {
   width = 510;
   height = 510;
   private colorOfFigures = "#853c7f";
+  private wrongFieldX;
+  private wrongFieldY;
+  private wrongFieldR;
 
   constructor(
     private router: Router,
@@ -47,11 +50,13 @@ export class MessageComponent {
   }
 
   ngOnInit() {
+    this.wrongFieldX = document.getElementById("wrongFieldX");
+    this.wrongFieldY = document.getElementById("wrongFieldY");
+    this.wrongFieldR = document.getElementById("wrongFieldR");
     this.primengConfig.ripple = true;
   }
 
   onSubmit() {
-    console.log(this.point);
     this.savePoint();
   }
 
@@ -63,21 +68,31 @@ export class MessageComponent {
   }
 
   addPoint() {
+    this.wrongFieldY.textContent = ""
+    this.wrongFieldX.textContent = ""
     console.log($('#x').val())
     // @ts-ignore
     this.point.x = $('#x').val();
     // @ts-ignore
     this.point.y = $('#y').val();
+    console.log(this.point.y)
     this.point.r = this.getCurrentR();
     console.log($('#y').val())
     $('#r').val(this.getCurrentR());
     console.log($('#r').val())
-    $('#submitButton').click();
-    this.point = new TablePoint();
+    if (this.validate()) {
+      $('#submitButton').click();
+      this.point = new TablePoint();
+      this.point.r = this.currentR;
+      $('#y').val();
+      $('#x').val();
+      $('.input_form_button_x').removeClass('button_x_clicked');
+    }
   }
 
   setY(event) {
     $('#y').val(event.target.value)
+    console.log($('#y').val())
   }
 
   loadPoints() {
@@ -309,6 +324,8 @@ export class MessageComponent {
   }
 
   signOut() {
+    localStorage.setItem("isLoggedIn", "false");
+    localStorage.setItem("Id", null);
     this.authService.logOut();
     this.router.navigate(['/login']);
   }
@@ -347,4 +364,40 @@ export class MessageComponent {
   checkReversedCircle(x, y, r) {
     return x <= 0 && y >= 0 && x * x + y * y <= r * r;
   }
+
+  validate() {
+    // @ts-ignore
+    return this.validateY() & this.validateX();
+  }
+
+  validateX() {
+    let x = $('#x').val();
+    if (x === "") {
+      this.wrongFieldX.textContent = "Поле X должно быть заполнено";
+      return false;
+    }
+    return true;
+  }
+
+  validateY() {
+    let y = $('#y').val();
+    console.log(y)
+    if (y == "") {
+      this.wrongFieldY.textContent = "Поле Y должно быть заполнено";
+      return false;
+    }
+    // @ts-ignore
+    y = y.substr(0, 10).replace(',', '.');
+    // @ts-ignore
+    if (!(y && !isNaN(y))) {
+      this.wrongFieldY.textContent = "Y должен быть числом!";
+      return false;
+    }
+    if (!((y >= -3) && (y <= 3))) {
+      this.wrongFieldY.textContent = "Y должен принадлежать промежутку: (-3; 3)!";
+      return false;
+    }
+    return true;
+  }
+
 }
